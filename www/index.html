@@ -1,0 +1,156 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <title>Счетовод</title> 
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1.0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="stylesheet" href="jquery.mobile-1.3.1.css" />
+        <link rel="stylesheet" href="style.css" />
+        <script type="text/javascript" charset="utf-8" src="js/class_DB.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/fastclick.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/jquery.mobile-1.3.1.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/main.js"></script>
+    </head> 
+    <body> 
+ <!-- 
+        D:
+        cd D:\OpenServer\domains\schetovod\
+        set JAVA_HOME=D:\Program Files\Java\jdk1.8.0_77
+        cordova run android --release -- --keystore=D:\google_disk\31129deen812_all_key --storePassword=31129deen812 --alias=deen812 --password=31129deen812
+        
+        
+        D:\OpenServer\domains\schetovod\platforms\android\build\outputs\apk
+        -->
+        <div data-role="page">
+            <div data-role="header" data-position="fixed">
+                <h1>Счетовод</h1>
+            </div><!-- /header -->
+            <div data-role="content"> 
+                <ul data-role="listview" data-inset="true">
+                    <li data-role="list-divider">выберите раздел:</li>
+                    <li><span class="icon1 icon-elec"></span><a href="#raschet" onclick="StartRaschet('svet')">Электроэнергия</a></li>
+                    <li><span class="icon1 icon-gas"></span><a href="#raschet" onclick="StartRaschet('gas')">Газ</a></li>
+                    <li><span class="icon1 icon-hvoda"></span><a href="#raschet" onclick="StartRaschet('hvoda')">Холодная вода</a></li>
+                    <li><span class="icon1 icon-gvoda"></span><a href="#raschet" onclick="StartRaschet('gvoda')">Горячая вода</a></li>
+                 <!--   <li><a href="#raschet" onclick="StartRaschet('internet')">Интернет</a></li>-->
+                    <li><span class="icon1 icon-kanal"></span><a href="#raschet" onclick="StartRaschet('kanal')">Канализация</a></li>
+                </ul>
+                <!--<a href="#raschet" data-role="button" data-icon="plus">Добавить показания</a>-->
+                <br>
+                <!--
+                <a href="#" data-role="button" data-icon="arrow-r" onclick="alert('В разработке');return false;">Расходы</a>
+                <a href="#" data-role="button" data-icon="gear" onclick="alert('В разработке');return false;">Настройки</a>
+                -->
+                <div class="ui-body">
+                    <div data-role="collapsible" data-collapsed="true" data-theme="a">
+                        <h3>О программе</h3>
+                        <p>Счетовод</p>
+                        <p>версия: 2.0.1</p>
+                        <p>автор: Кагарманов Динис</p>
+                        <p>email: deen812@mail.ru</p>
+                        <h3>Как помочь проекту?</h3>
+                <p>Оставьте положительный отзыв и поставьте оценку 4 или 5.</p>
+                    </div><!-- /collapsible -->
+                    <a href="#" data-role="button" onclick=" navigator.app.exitApp();">Выйти</a>
+                </div><!-- /themed container -->  
+            </div><!-- /content -->
+        </div><!-- /page -->
+
+
+
+        <!-- ----------------------------- --------------------------------->
+        <div data-role="page" id="raschet" >
+            <div data-role="header">
+                <a data-rel="back" class="back-btn" data-icon="back">Назад</a>
+                <h1 id="title">Счетовод</h1>
+            </div>
+            <div class="item" data-role="content">
+                <h2 id="raschet-h2">Электроэнергия</h2>
+                <div id="primer-kak" data-role="collapsible" data-collapsed="true" data-theme="d">
+                    <h3>пример как заполнять</h3>
+                    <div class="rouned-section">
+                        <table class="table-primer">
+                            <tr>
+                                <td>тариф </td> <td> например для 2 руб 31 копеек вводим в первое поле 2, во второе 31</td>
+                            </tr>
+                            <tr>
+                                <td>предыдущее показание </td> <td> например для <span class="ex-1">1000</span>,<span class="ex-2">897</span> вводим в первое поле 1000, во второе 897</td>
+                            </tr>
+                            <tr>
+                                <td>текущее показание </td> <td>  например для <span class="ex-1">1022</span>,<span class="ex-2">007</span> вводим в первое поле 1022, во второе 007</td>
+                            </tr>
+                            <tr>
+                                <td>дата </td> <td>на расчеты не влияет. Используется для отчетов</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div><!-- /collapsible -->
+                <table class="inputs-table">
+                    <tr>
+                        <td> <label for="tarif-elec">тариф <br><span id="tarif-izmerenie">(руб*квт):</span></label></td>
+                        <td><span class="input-container"><input type="number" name="name" id="tarif-elec-1" value="2"  /> </span></td>
+                        <td class="znak">,</td>
+                        <td><span class="input-container"><input type="number" name="name" id="tarif-elec-2" value="13"  /> </span></td>
+                    </tr>
+                    <tr>
+                        <td> <label for="p_a-elec">предыдущее показание <br><span class="izmerenie">(квт):</span></label></td>
+                        <td><span class="input-container"><input type="number" name="name" id="p_a-elec-1" value="1000"  /> </span></td>
+                        <td class="znak">,</td>
+                        <td><span class="input-container"><input type="number" name="name" id="p_a-elec-2" value="00"  /> </span></td>
+                    </tr>
+                     <tr>
+                        <td><label for="p_b-elec">текущее показание <br><span class="izmerenie">(квт):</span></label></td>
+                        <td><span class="input-container" style="xwidth:100px;"><input type="number" name="name" id="p_b-elec-1" value="1022"  /> </span></td>
+                        <td class="znak">,</td>
+                        <td><span class="input-container" style="xwidth:70px;"><input type="number" name="name" id="p_b-elec-2" value="00"  /> </span></td>
+                    </tr>
+                    <tr>
+                        <td><label for="date-elec">дата:</label></td>
+                        <td colspan="3"><span class="input-container">
+                                <input type="date" name="name" id="date-elec" class="xdate-init-today" value="2016-01-01"  /></span></td>
+                    </tr>
+                </table>
+                
+                <a href="#" data-role="button" onclick="RaschetElectro()" data-theme="a">Расчитать</a>
+                <div class="" id="pre-reaschet" style="display:none">
+                    
+                    <table>
+                        <tr>
+                            <td>тариф:</td><td id="itog-tarif">213</td>
+                        </tr>
+                         <tr>
+                            <td>показание А:</td><td id="itog-pa">10000</td>
+                        </tr>
+                         <tr>
+                            <td>показание Б:</td><td id="itog-pb">1000,21</td>
+                        </tr>
+                         <tr>
+                            <td>расход:</td><td id="itog-ras">213,88</td>
+                        </tr>
+                        <tr class="itog-summa">
+                            <td class="itog-summa-1">сумма:</td><td class="itog-summa-2"><span id="itog-summa">1000</span> руб</td>
+                        </tr>
+                    </table>
+                    <p>убедитесь что  введенные данные верные и сохраниет данные</p>
+                    <a href="#" data-role="button" onclick="ElectroSaveData()" data-theme="b">Сохранить показания</a>  
+                </div>
+                <h2>Список показаний</h2>
+                <div id="electrotable">
+                  
+                </div>
+                <table  class="table-stroke my-table">
+                    
+                </table>
+                 
+            </div>
+        </div>
+        <!-- ----------------------------- --------------------------------->  
+
+
+
+    </body>
+</html>

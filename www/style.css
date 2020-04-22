@@ -1,0 +1,37 @@
+.my-table {width:100%; }
+.my-table td{ padding: 5px;}
+.my-table tr td:first-child { background:  #F3E7D9}
+.naprimer { margin-bottom: 6px;}
+.rouned-section { padding: 8px; border: 1px dashed #ccc;}
+.table-primer td{ border-bottom: 1px solid #ccc;font-size: 14px;}
+.table-primer tr td:first-child { font-weight: bold;border-right: 1px solid #ccc}
+.item  input{font-size: 20px;padding-top:8px; padding-bottom: 8px;}
+.input-container {max-width: 230px;display: block}
+.inputs-table {font-size: 13px;}
+.inputs-table span {color:#796852;}
+.pok1 {width:150px}
+.znak {font-weight: bold; font-size: 20px;color:#222}
+.itog-summa td {padding-top:10px;}
+.itog-summa-1 {font-weight: bold;color: #796852}
+.itog-summa-2 {font-size: 22px; font-weight: bold; color:  red}
+#pre-reaschet {margin-top:10px; border:1px  dashed #CBB294;border-radius: 5px;padding: 5px;background: #d0cecd}
+#pre-reaschet td {white-space:  nowrap}
+#pre-reaschet tr td:first-child {font-weight: bold;padding-right: 5px;}
+.th { background:  #ccc}
+.my-table { font-size: 13px;}
+.ex-1 { color: #fff; background: #000;padding-left: 3px;padding-right: 3px;}
+.ex-2 { color: #fff; background: red;padding-left: 3px;padding-right: 3px;}
+.icon1 {    display: block;
+    float: left;
+    width: 24px;
+    height: 24px;
+    background-size: cover;
+    margin-top: 5px;
+    margin-left: 13px;
+}
+.icon-elec {background-image: url(images/elec.png);}
+.icon-gas {background-image: url(images/gas.png);}
+.icon-hvoda {background-image: url(images/hvoda.png);}
+.icon-gvoda {background-image: url(images/gvoda.png);}
+.icon-kanal {background-image: url(images/kanal.png);}
+
